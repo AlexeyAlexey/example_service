@@ -11,6 +11,11 @@ gem 'bootsnap', require: false
 
 gem 'erb', '~> 4.0.0'
 
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
+
+gem 'activerecord', '~> 7.1', '>= 7.1.3.2'
+
 
 group :test do
   gem 'rack-test', '~> 2.1'

@@ -52,7 +52,7 @@ end
 
 ServiceApp.logger = Logger.new(STDOUT)
 
-# ServiceApp.load_config_file('postgresdb', ServiceApp.root)
+ServiceApp.load_config_file('database', ServiceApp.root)
 # ServiceApp.load_config_file('redis', ServiceApp.root)
 
 
@@ -60,6 +60,8 @@ ServiceApp.logger = Logger.new(STDOUT)
 #   conf.db_migration_directory = "#{ServiceApp.root}/db/migrations"
 
 # end
+
+require_relative 'initializers/active_record'
 
 
 require_dirs = ['app/api', 'lib']
@@ -69,7 +71,7 @@ require_dirs.each do |path|
 
   $LOAD_PATH.unshift path
 
-  Dir["#{path}/**/*.rb"].sort.each do |f|
+  Dir["#{path}/**/*.rb"].reject{ |el| el.include?('lib/tasks/import_active_record_tasks') }.sort.each do |f|
     require f
   end
 end

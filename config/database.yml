@@ -1,0 +1,26 @@
+test:
+  adapter: postgresql
+  user: 'vagrant'
+  password: 'vagrant'
+  host: '127.0.0.1'
+  port: 5432
+  database: 'vagrant'
+  max_connections: 1
+
+development:
+  adapter: postgresql
+  user: 'vagrant'
+  password: 'vagrant'
+  host: '127.0.0.1'
+  port: 5432
+  database: 'vagrant'
+  max_connections: 1
+
+production:
+  adapter: postgresql
+  user: 'postgres'
+  password: 'postgres'
+  host: '127.0.0.1'
+  port: 5432
+  database: 'postgres'
+  max_connections: 1
