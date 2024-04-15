@@ -50,7 +50,9 @@ module ServiceApp
   end
 end
 
-ServiceApp.logger = Logger.new(STDOUT)
+log_file = File.open("#{ServiceApp.root}/log/#{ServiceApp.env}.log", File::WRONLY | File::APPEND | File::CREAT)
+
+ServiceApp.logger = Logger.new(log_file)
 
 ServiceApp.load_config_file('database', ServiceApp.root)
 # ServiceApp.load_config_file('redis', ServiceApp.root)
@@ -64,7 +66,8 @@ ServiceApp.load_config_file('database', ServiceApp.root)
 require_relative 'initializers/active_record'
 
 
-require_dirs = ['app/api', 'lib']
+
+require_dirs = ['app/api', 'app/jobs', 'lib']
 
 require_dirs.each do |path|
   path = File.expand_path(File.join(File.dirname(__FILE__), '..', path))
@@ -75,3 +78,7 @@ require_dirs.each do |path|
     require f
   end
 end
+
+
+require_relative 'initializers/sidekiq'
+require_relative 'initializers/sidekiq_cron'

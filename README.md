@@ -4,6 +4,11 @@ chmod +x bin/bundle
 chmod +x bin/console
 
 
+# REST API
+
+[Grape](https://github.com/ruby-grape/grape/tree/v2.0.0?tab=readme-ov-file#versioning)
+
+
 ## Puma
 
 ```
@@ -25,4 +30,11 @@ SERVICE_APP_ENV=development rake --tasks
 
 ```shell
 SERVICE_APP_ENV=development rake db:create_migration create_user
+```
+
+
+# Jobs
+
+```shell
+SERVICE_APP_ENV=development bundle exec sidekiq -r ./config/environment.rb
 ```
