@@ -3,7 +3,6 @@ require_relative 'boot'
 
 Bundler.require :default, ENV['SERVICE_APP_ENV']
 
-
 module ServiceApp
   class Error < StandardError; end
 
@@ -46,22 +45,25 @@ module ServiceApp
   def self.load_config_file(file_name, root, ext = 'yml')
     file_path = File.join(root, 'config', "#{file_name}.#{ext}")
     erb = ERB.new(File.read(file_path)).result
-    configuration[file_name] = OpenStruct.new(YAML.load(erb).deep_symbolize_keys)
+    configuration[file_name] = OpenStruct.new(YAML.load(erb, aliases: true).deep_symbolize_keys)
   end
 end
 
-log_file = File.open("#{ServiceApp.root}/log/#{ServiceApp.env}.log", File::WRONLY | File::APPEND | File::CREAT)
+if ENV['SERVICE_APP_LOG_TO_STDOUT'].to_s == 'true'
+  ServiceApp.logger = Logger.new(STDOUT)
+else
+  log_file = File.open("#{ServiceApp.root}/log/#{ServiceApp.env}.log", File::WRONLY | File::APPEND | File::CREAT)
 
-ServiceApp.logger = Logger.new(log_file)
+  ServiceApp.logger = Logger.new(log_file)
+end
 
 ServiceApp.load_config_file('database', ServiceApp.root)
 # ServiceApp.load_config_file('redis', ServiceApp.root)
 
 
-# ServiceApp.configure do |conf|
-#   conf.db_migration_directory = "#{ServiceApp.root}/db/migrations"
-
-# end
+ServiceApp.configure do |conf|
+  conf.sidekiq_redis_url = ENV.fetch('SIDEKIQ_REDIS_URL', 'redis://localhost:6379/0')
+end
 
 require_relative 'initializers/active_record'
 
@@ -78,7 +80,6 @@ require_dirs.each do |path|
     require f
   end
 end
-
 
 require_relative 'initializers/sidekiq'
 require_relative 'initializers/sidekiq_cron'

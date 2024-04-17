@@ -1,26 +1,17 @@
-test:
+default: &default
   adapter: postgresql
-  user: 'vagrant'
-  password: 'vagrant'
-  host: '127.0.0.1'
-  port: 5432
-  database: 'vagrant'
+  user: <%=ENV.fetch('POSTGRES_USER', 'postgres')%>
+  password: <%=ENV.fetch('POSTGRES_PASSWORD', 'postgres')%>
+  host: <%=ENV.fetch('POSTGRES_HOST', '127.0.0.1')%>
+  port: <%=ENV.fetch('POSTGRES_PORT', 5432).to_i%>
+  database: <%=ENV.fetch('POSTGRES_DB', 'postgres')%>
   max_connections: 1
+
+test:
+  <<: *default
 
 development:
-  adapter: postgresql
-  user: 'vagrant'
-  password: 'vagrant'
-  host: '127.0.0.1'
-  port: 5432
-  database: 'vagrant'
-  max_connections: 1
+  <<: *default
 
 production:
-  adapter: postgresql
-  user: 'postgres'
-  password: 'postgres'
-  host: '127.0.0.1'
-  port: 5432
-  database: 'postgres'
-  max_connections: 1
+  <<: *default

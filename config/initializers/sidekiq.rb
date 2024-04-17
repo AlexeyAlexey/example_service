@@ -1,5 +1,5 @@
 Sidekiq.configure_server do |config|
-  config.redis = { url: 'redis://localhost:6379/0' }
+  config.redis = { url: ServiceApp.config.sidekiq_redis_url }
   config.logger = Sidekiq::Logger.new($stdout)
   # config.logger = ServiceApp.logger
 
@@ -19,5 +19,5 @@ end
 
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: 'redis://localhost:6379/0' }
+  config.redis = { url: ServiceApp.config.sidekiq_redis_url }
 end
