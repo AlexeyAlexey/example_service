@@ -22,6 +22,10 @@ module ServiceApp
     @configuration
   end
 
+  def self.db_connection=(db)
+    @db_connection = db
+  end
+
   def self.db
     @db_connection
   end
@@ -65,7 +69,7 @@ ServiceApp.configure do |conf|
   conf.sidekiq_redis_url = ENV.fetch('SIDEKIQ_REDIS_URL', 'redis://localhost:6379/0')
 end
 
-require_relative 'initializers/active_record'
+require_relative 'initializers/sequel'
 
 
 

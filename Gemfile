@@ -12,9 +12,10 @@ gem 'bootsnap', require: false
 gem 'erb', '~> 4.0.0'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.5', '>= 1.5.6'
 
-gem 'activerecord', '~> 7.1', '>= 7.1.3.2'
+# The Database Toolkit for Ruby
+gem 'sequel', '~> 5.45'
 
 gem 'sidekiq', '~> 7.2', '>= 7.2.2'
 gem 'sidekiq-cron', '~> 1.12'
