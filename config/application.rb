@@ -80,7 +80,7 @@ require_dirs.each do |path|
 
   $LOAD_PATH.unshift path
 
-  Dir["#{path}/**/*.rb"].reject{ |el| el.include?('lib/tasks/import_active_record_tasks') }.sort.each do |f|
+  Dir["#{path}/**/*.rb"].sort.each do |f|
     require f
   end
 end

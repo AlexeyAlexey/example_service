@@ -41,6 +41,10 @@ SERVICE_APP_ENV=development rake db:create_migration create_user
 
 branch: [feature/sequel-db-access-toolkit](https://github.com/AlexeyAlexey/example_service/tree/feature/sequel-db-access-toolkit)
 
+```shell
+SERVICE_APP_ENV=development rake --tasks
+```
+
 
 # Jobs
 

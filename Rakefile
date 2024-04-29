@@ -4,10 +4,6 @@
 require_relative 'config/environment'
 
 
-# Importing Active Record Tasks
-require_relative 'lib/tasks/import_active_record_tasks'
-#
-
 RAKE_REQUIRE_DIRS = ['lib/tasks'].freeze
 
 RAKE_REQUIRE_DIRS.each do |path|
