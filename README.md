@@ -25,6 +25,8 @@ curl http://localhost:3000/v1/hello_world/
 [systemd](https://github.com/puma/puma/blob/master/docs/systemd.md)
 
 
+# DB Access
+
 ## Active Record
 
 ```shell
@@ -34,6 +36,10 @@ SERVICE_APP_ENV=development rake --tasks
 ```shell
 SERVICE_APP_ENV=development rake db:create_migration create_user
 ```
+
+## Sequel
+
+branch: [feature/sequel-db-access-toolkit](https://github.com/AlexeyAlexey/example_service/tree/feature/sequel-db-access-toolkit)
 
 
 # Jobs
