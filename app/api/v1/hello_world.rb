@@ -10,6 +10,10 @@ module API
 
           { message: 'Hello World' }
         end
+
+        get '/db_version' do
+          { message: ActiveRecord::Base.connection.execute('SELECT VERSION();').values.flatten.first }
+        end
       end
     end
   end
